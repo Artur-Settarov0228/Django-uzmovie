@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Filmlar ro'yxati</title>
+</head>
+<body>
+    <h1>🎬 Filmlar ro'yxati</h1>
+    <a href="{% url 'add_movie' %}">+ Yangi film qo'shish</a>
+    <hr>
+
+    {% for movie in movies %}
+        <div style="margin-bottom:30px;">
+            <h2>{{ movie.title }}</h2>
+            <p>{{ movie.description }}</p>
+
+            {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" width="200">
+            {% endif %}
+
+            {% if movie.video_url %}
+                <p><a href="{{ movie.video_url }}" target="_blank">🎥 Treylerni ko‘rish</a></p>
+            {% else %}
+                <p>Treyler mavjud emas</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
