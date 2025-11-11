@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}KinoPortal - O'zbek Kinolari{% endblock %}</title>
+    {% load static %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #09ff00, #1eb700);
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(7, 23, 93, 0.1);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0f1724;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-red {
+            color: #09ff00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(9, 255, 0, 0.1);
+            color: #1eb700;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: #09ff00;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #1eb700;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(9, 255, 0, 0.3);
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            margin-top: 4rem;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="{% url 'home' %}" class="logo">
+                🎬 Kino<span class="logo-red">Portal</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'home' %}" class="nav-link">🏠 Bosh Sahifa</a>
+                <a href="{% url 'add_movie' %}" class="btn">➕ Kino Qo'shish</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 KinoPortal. Barcha huquqlar himoyalangan.</p>
+    </footer>
+</body>
+</html>

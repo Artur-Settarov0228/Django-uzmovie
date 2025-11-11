@@ -102,6 +102,7 @@ STATIC_URL = 'static/'
 # Media fayllar (rasmlar, videolar)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATICFILES_DIRS = [BASE_DIR / 'uzmovie' / 'static'] # static papkasi yo'li
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

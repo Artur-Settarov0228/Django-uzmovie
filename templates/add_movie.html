@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block title %}Kino Qo'shish - KinoPortal{% endblock %}
+
+{% block extra_css %}
+<style>
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(7, 23, 93, 0.12);
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #0f1724;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="file"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  input[type="url"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #09ff00;
+    box-shadow: 0 0 0 3px rgba(9, 255, 0, 0.2);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-checkbox {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 15px;
+    color: #1e293b;
+  }
+
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .custom-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    transition: all 0.3s ease;
+  }
+
+  .custom-checkbox input:checked ~ .checkmark {
+    background: linear-gradient(135deg, #09ff00, #1eb700);
+    border-color: #09ff00;
+  }
+
+  .custom-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .custom-checkbox input:checked ~ .checkmark::after {
+    display: block;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  button {
+    padding: 14px 22px;
+    background: #09ff00;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  button:hover {
+    background: #1eb700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(9, 255, 0, 0.3);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #09ff00;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: #1eb700;
+  }
+
+  @media (max-width: 500px) {
+    .container {
+      padding: 20px;
+      margin: 20px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'home' %}" class="back-link">
+        ← Bosh sahifaga qaytish
+    </a>
+    
+    <h1>🎬 Yangi Kino Qo'shish</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="title">Kino Nomi</label>
+            <input type="text" id="title" name="title" placeholder="Kino nomini kiriting" required>
+        </div>
+
+        <div>
+            <label for="description">Kino Tavsifi</label>
+            <textarea id="description" name="description" placeholder="Kino haqida batafsil ma'lumot" required></textarea>
+        </div>
+
+        <div>
+            <label for="release_date">Chiqgan Sana</label>
+            <input type="date" id="release_date" name="release_date" required>
+        </div>
+
+        <div>
+            <label for="genre">Janr</label>
+            <select id="genre" name="genre" required>
+                <option value="">-- Janrni tanlang --</option>
+                <option value="Drama">Drama</option>
+                <option value="Komediya">Komediya</option>
+                <option value="Fantastika">Fantastika</option>
+                <option value="Sarguzasht">Sarguzasht</option>
+                <option value="Romantika">Romantika</option>
+                <option value="Jangari">Jangari</option>
+                <option value="Tarixiy">Tarixiy</option>
+                <option value="Detektiv">Detektiv</option>
+                <option value="Qo'rqinchli">Qo'rqinchli</option>
+                <option value="Multfilm">Multfilm</option>
+                <option value="Biografik">Biografik</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="rating">Reyting (1-10)</label>
+            <input type="number" id="rating" name="rating" min="1" max="10" step="0.1" placeholder="Masalan: 8.5" required>
+        </div>
+
+        <div>
+            <label for="poster">Kino Posteri</label>
+            <input type="file" id="poster" name="poster" accept="image/*">
+        </div>
+
+        <div>
+            <label for="video_url">Video Havolasi (YouTube yoki boshqa)</label>
+            <input type="url" id="video_url" name="video_url" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+
+        <div class="checkbox">
+            <label class="custom-checkbox">
+                <input type="checkbox" name="is_active" checked>
+                Kino faol
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+        <button type="submit">✅ Kino Qo'shish</button>
+    </form>
+</div>
+{% endblock %}
