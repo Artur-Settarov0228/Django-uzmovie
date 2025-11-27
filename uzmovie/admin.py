@@ -1,6 +1,9 @@
 from django.contrib import admin
-
-# Register your models here.
-
 from .models import Movie
-admin.site.register(Movie)
+
+@admin.register(Movie)
+class MovieAdmin(admin.ModelAdmin):
+    list_display = ['title', 'genre', 'rating', 'release_date', 'created_at']
+    list_filter = ['genre', 'release_date']
+    search_fields = ['title', 'description']
+    ordering = ['-created_at']
