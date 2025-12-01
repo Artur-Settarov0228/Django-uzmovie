@@ -1,240 +1,186 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Kino Qo'shish - KinoPortal{% endblock %}
-
-{% block extra_css %}
-<style>
-  .container {
-    max-width: 800px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 32px;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(7, 23, 93, 0.12);
-  }
-
-  h1 {
-    font-size: 28px;
-    margin-bottom: 24px;
-    color: #0f1724;
-    text-align: center;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  label {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  input[type="text"],
-  input[type="number"],
-  input[type="date"],
-  input[type="file"],
-  input[type="url"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.2s;
-  }
-
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  input[type="date"]:focus,
-  input[type="url"]:focus,
-  textarea:focus,
-  select:focus {
-    border-color: #09ff00;
-    box-shadow: 0 0 0 3px rgba(9, 255, 0, 0.2);
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-
-  .checkbox {
-    display: flex;
-    align-items: center;
-  }
-
-  .custom-checkbox {
-    position: relative;
-    padding-left: 32px;
-    cursor: pointer;
-    user-select: none;
-    font-size: 15px;
-    color: #1e293b;
-  }
-
-  .custom-checkbox input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .custom-checkbox .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-    transition: all 0.3s ease;
-  }
-
-  .custom-checkbox input:checked ~ .checkmark {
-    background: linear-gradient(135deg, #09ff00, #1eb700);
-    border-color: #09ff00;
-  }
-
-  .custom-checkbox .checkmark::after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  .custom-checkbox input:checked ~ .checkmark::after {
-    display: block;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-
-  button {
-    padding: 14px 22px;
-    background: #09ff00;
-    color: white;
-    font-weight: 600;
-    font-size: 15px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  button:hover {
-    background: #1eb700;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(9, 255, 0, 0.3);
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #09ff00;
-    text-decoration: none;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    transition: color 0.3s ease;
-  }
-
-  .back-link:hover {
-    color: #1eb700;
-  }
-
-  @media (max-width: 500px) {
-    .container {
-      padding: 20px;
-      margin: 20px;
-    }
-  }
-</style>
-{% endblock %}
+{% block title %}Kino Qo'shish - UZMDV{% endblock %}
 
 {% block content %}
-<div class="container">
-    <a href="{% url 'home' %}" class="back-link">
-        ← Bosh sahifaga qaytish
-    </a>
-    
-    <h1>🎬 Yangi Kino Qo'shish</h1>
-    
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <div>
-            <label for="title">Kino Nomi</label>
-            <input type="text" id="title" name="title" placeholder="Kino nomini kiriting" required>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card" style="background: var(--card-bg); border-radius: 20px;">
+            <div class="card-header text-center py-4" style="background: linear-gradient(135deg, #e50914 0%, #b20710 100%);">
+                <h3 class="mb-0">
+                    <i class="fas fa-plus-circle me-2"></i> YANGI KINO QO'SHISH
+                </h3>
+            </div>
+            
+            <div class="card-body p-5">
+                <!-- Reklama (form tepasida) -->
+                <div class="ad-banner mb-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-bullhorn fa-2x me-3" style="color: #ffd700;"></i>
+                        <div>
+                            <h6 class="ad-title mb-1">KINO YUKLAGANLARGA BEPUL VIP OBUNA!</h6>
+                            <p class="ad-text mb-0">Har 5 ta kino uchun 1 oylik VIP obuna beramiz</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- Chap ustun -->
+                        <div class="col-md-6">
+                            <!-- Kino nomi -->
+                            <div class="mb-4">
+                                <label for="id_title" class="form-label">
+                                    <i class="fas fa-heading me-2"></i> Kino Nomi
+                                </label>
+                                <input type="text" name="title" id="id_title" 
+                                       class="form-control search-box" 
+                                       placeholder="Misol: O'tkan kunlar" required>
+                            </div>
+                            
+                            <!-- Chiqgan sana -->
+                            <div class="mb-4">
+                                <label for="id_release_date" class="form-label">
+                                    <i class="far fa-calendar me-2"></i> Chiqgan Sana
+                                </label>
+                                <input type="date" name="release_date" id="id_release_date" 
+                                       class="form-control search-box" required>
+                            </div>
+                            
+                            <!-- Janr -->
+                            <div class="mb-4">
+                                <label for="id_genre" class="form-label">
+                                    <i class="fas fa-tags me-2"></i> Janr
+                                </label>
+                                <select name="genre" id="id_genre" class="form-select search-box" required>
+                                    <option value="">Janrni tanlang</option>
+                                    {% for value, display in form.genre.field.choices %}
+                                        <option value="{{ value }}">{{ display }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <!-- Reyting -->
+                            <div class="mb-4">
+                                <label for="id_rating" class="form-label">
+                                    <i class="fas fa-star me-2" style="color: #ffd700;"></i> Reyting (1-10)
+                                </label>
+                                <input type="number" name="rating" id="id_rating" 
+                                       class="form-control search-box" min="1" max="10" 
+                                       step="0.1" placeholder="Misol: 8.5" required>
+                                <div class="form-text">1 (yomon) dan 10 (a'lo) gacha</div>
+                            </div>
+                        </div>
+                        
+                        <!-- O'ng ustun -->
+                        <div class="col-md-6">
+                            <!-- Poster -->
+                            <div class="mb-4">
+                                <label for="id_poster" class="form-label">
+                                    <i class="fas fa-image me-2"></i> Kino Posteri
+                                </label>
+                                <input type="file" name="poster" id="id_poster" 
+                                       class="form-control search-box" accept="image/*" required>
+                                <div class="form-text">Rasm hajmi 5MB dan oshmasin</div>
+                            </div>
+                            
+                            <!-- Video havolasi -->
+                            <div class="mb-4">
+                                <label for="id_video_url" class="form-label">
+                                    <i class="fas fa-video me-2"></i> Video Havolasi (ixtiyoriy)
+                                </label>
+                                <input type="url" name="video_url" id="id_video_url" 
+                                       class="form-control search-box" 
+                                       placeholder="https://youtube.com/watch?v=...">
+                            </div>
+                            
+                            <!-- Tavsif -->
+                            <div class="mb-4">
+                                <label for="id_description" class="form-label">
+                                    <i class="fas fa-align-left me-2"></i> Kino Tavsifi
+                                </label>
+                                <textarea name="description" id="id_description" 
+                                          class="form-control search-box" 
+                                          rows="5" 
+                                          placeholder="Kino haqida qisqacha ma'lumot..." 
+                                          required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reklama (form ostida) -->
+                    <div class="ad-banner mt-4 mb-4" style="background: linear-gradient(135deg, #1a237e 0%, #283593 100%);">
+                        <div class="text-center">
+                            <i class="fas fa-gift fa-2x mb-2" style="color: #4caf50;"></i>
+                            <h6 class="ad-title mb-1">HOZIR QO'SHING VA BONUS OLING!</h6>
+                            <p class="ad-text">Har bir qo'shilgan kino uchun 100 ball oling va sovg'alarni yuting</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tugmalar -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> ORQAGA
+                        </a>
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="fas fa-save me-2"></i> KINONI SAQLASH
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div>
-            <label for="description">Kino Tavsifi</label>
-            <textarea id="description" name="description" placeholder="Kino haqida batafsil ma'lumot" required></textarea>
+        
+        <!-- Qo'shimcha reklama -->
+        <div class="sidebar-ad mt-5">
+            <div class="text-center">
+                <i class="fas fa-film fa-3x mb-3" style="color: #9c27b0;"></i>
+                <h4 class="ad-title">KINO YUKLASH QO'LLANMASI</h4>
+                <p class="ad-text">Kinolarni qanday yuklash va ulashish kerakligini bilib oling</p>
+                <button class="btn w-50 mt-3" style="background: #9c27b0; color: white;">
+                    <i class="fas fa-book me-2"></i> QO'LLANMANI KO'RISH
+                </button>
+            </div>
         </div>
-
-        <div>
-            <label for="release_date">Chiqgan Sana</label>
-            <input type="date" id="release_date" name="release_date" required>
-        </div>
-
-        <div>
-            <label for="genre">Janr</label>
-            <select id="genre" name="genre" required>
-                <option value="">-- Janrni tanlang --</option>
-                <option value="Drama">Drama</option>
-                <option value="Komediya">Komediya</option>
-                <option value="Fantastika">Fantastika</option>
-                <option value="Sarguzasht">Sarguzasht</option>
-                <option value="Romantika">Romantika</option>
-                <option value="Jangari">Jangari</option>
-                <option value="Tarixiy">Tarixiy</option>
-                <option value="Detektiv">Detektiv</option>
-                <option value="Qo'rqinchli">Qo'rqinchli</option>
-                <option value="Multfilm">Multfilm</option>
-                <option value="Biografik">Biografik</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="rating">Reyting (1-10)</label>
-            <input type="number" id="rating" name="rating" min="1" max="10" step="0.1" placeholder="Masalan: 8.5" required>
-        </div>
-
-        <div>
-            <label for="poster">Kino Posteri</label>
-            <input type="file" id="poster" name="poster" accept="image/*">
-        </div>
-
-        <div>
-            <label for="video_url">Video Havolasi (YouTube yoki boshqa)</label>
-            <input type="url" id="video_url" name="video_url" placeholder="https://www.youtube.com/watch?v=...">
-        </div>
-
-        <div class="checkbox">
-            <label class="custom-checkbox">
-                <input type="checkbox" name="is_active" checked>
-                Kino faol
-                <span class="checkmark"></span>
-            </label>
-        </div>
-
-        <button type="submit">✅ Kino Qo'shish</button>
-    </form>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Formani qo'shimcha tekshirish
+    document.getElementById('id_rating').addEventListener('input', function() {
+        if (this.value < 1) this.value = 1;
+        if (this.value > 10) this.value = 10;
+    });
+    
+    // Rasmni oldindan ko'rish
+    document.getElementById('id_poster').addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Rasmni ko'rsatish uchun joy
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'text-center mt-3';
+                previewDiv.innerHTML = `
+                    <h6>Poster ko'rinishi:</h6>
+                    <img src="${e.target.result}" class="img-fluid rounded" style="max-height: 200px;">
+                `;
+                document.getElementById('id_poster').parentNode.appendChild(previewDiv);
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+    
+    // Formani yuborish
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const rating = parseFloat(document.getElementById('id_rating').value);
+        if (rating < 1 || rating > 10) {
+            e.preventDefault();
+            alert('Iltimos, reytingni 1 dan 10 gacha bo\'lgan oraliqda kiriting!');
+        }
+    });
+</script>
 {% endblock %}
